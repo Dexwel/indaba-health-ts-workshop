@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GitBook Publishing Guide | Indaba Workshop</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Playfair+Display:wght@700;900&family=Libre+Baskerville&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #161b22;
+    --card: #1c2128;
+    --border: #30363d;
+    --green: #3fb950;
+    --amber: #d29922;
+    --blue: #58a6ff;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Playfair Display', serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Libre Baskerville', serif; line-height: 1.7; }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 5vw;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .header-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--green);
+    color: var(--green);
+  }
+  .header-title { font-family: var(--serif); font-size: 20px; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 60px 5vw; }
+
+  h1 { font-family: var(--serif); font-size: clamp(32px, 5vw, 56px); margin-bottom: 12px; }
+  .subtitle { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 48px; }
+
+  .estimated-time {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(63,185,80,0.1);
+    border: 1px solid rgba(63,185,80,0.3);
+    border-radius: 4px;
+    padding: 10px 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--green);
+    margin-bottom: 56px;
+  }
+
+  .step-block { margin-bottom: 48px; }
+  .step-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 20px;
+  }
+  .step-badge {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--green);
+    flex-shrink: 0;
+  }
+  h2 { font-family: var(--serif); font-size: 22px; }
+  p { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
+
+  .code-box {
+    background: #010409;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--text);
+  }
+  .code-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .g { color: var(--green); }
+  .b { color: var(--blue); }
+  .a { color: var(--amber); }
+  .m { color: var(--muted); font-style: italic; }
+
+  .tip-box {
+    background: rgba(210,153,34,0.08);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--amber);
+  }
+  .note-box {
+    background: rgba(88,166,255,0.08);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--blue);
+  }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  .checklist { list-style: none; margin: 16px 0; }
+  .checklist li {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .checklist li::before { content: '☐'; color: var(--muted); flex-shrink: 0; }
+  .checklist li:last-child { border-bottom: none; }
+
+  .final-banner {
+    background: linear-gradient(135deg, rgba(63,185,80,0.1), rgba(88,166,255,0.05));
+    border: 1px solid rgba(63,185,80,0.3);
+    border-radius: 8px;
+    padding: 32px;
+    margin-top: 56px;
+    text-align: center;
+  }
+  .final-banner h3 { font-family: var(--serif); font-size: 24px; margin-bottom: 8px; }
+  .final-banner p { text-align: center; max-width: 100%; }
+  .final-url {
+    font-family: var(--mono);
+    font-size: 15px;
+    color: var(--green);
+    margin-top: 16px;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="header-badge">GUIDE</span>
+  <span class="header-title">Publishing Your Workshop on GitBook</span>
+</header>
+
+<main>
+  <h1>From Files to<br/>Live Website</h1>
+  <p class="subtitle">A complete guide · GitHub → GitBook → Public URL</p>
+
+  <div class="estimated-time">
+    ⏱ Total time: approximately 20 minutes from scratch
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">1</div>
+      <h2>Set Up Your GitHub Repository</h2>
+    </div>
+    <p>GitBook syncs from GitHub. Your repo is the source of truth — every push to GitHub automatically updates your live site.</p>
+    <p>Go to <strong>github.com → New Repository</strong> and create a public repo named:</p>
+    <div class="code-box"><span class="g">indaba-health-ts-workshop</span></div>
+    <p>Initialize with a README. Make sure it is <strong>Public</strong> — GitBook's free tier requires public repos.</p>
+    <div class="tip-box">💡 TIP: Use this exact name. It will become your URL: yourname.gitbook.io/indaba-health-ts-workshop</div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- STEP 2 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">2</div>
+      <h2>Upload Your Workshop Files</h2>
+    </div>
+    <p>Upload the files from this workshop package to your repository. Your final folder structure should look like this:</p>
+    <div class="code-label">Repository Structure</div>
+    <div class="code-box"><span class="g">indaba-health-ts-workshop/</span>
+├── <span class="b">README.md</span>               <span class="m">← Home page</span>
+├── <span class="b">SUMMARY.md</span>              <span class="m">← Navigation (GitBook reads this)</span>
+├── docs/
+│   ├── <span class="b">01-motivation.md</span>
+│   ├── <span class="b">02-core-concepts.md</span>
+│   ├── <span class="b">03-hands-on.md</span>
+│   ├── <span class="b">03a-task1.md</span>
+│   ├── <span class="b">03b-task2.md</span>
+│   ├── <span class="b">03c-task3.md</span>
+│   ├── <span class="b">04-frontiers.md</span>
+│   └── <span class="b">05-resources.md</span>
+├── notebooks/
+│   └── <span class="a">temporal_health_workshop.ipynb</span>
+└── assets/
+    └── images/</div>
+    <div class="note-box">📌 NOTE: SUMMARY.md is the most important file. GitBook reads it to build your sidebar navigation. Every page must be listed there.</div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- STEP 3 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">3</div>
+      <h2>Create a GitBook Account</h2>
+    </div>
+    <p>Go to <strong>gitbook.com</strong> and click <strong>Sign up</strong>. Use your GitHub account — this makes the connection seamless.</p>
+    <p>Once logged in, click <strong>New Space</strong>. Name it "Temporal Health Intelligence — Indaba Workshop". Choose <strong>Public</strong> visibility.</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- STEP 4 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">4</div>
+      <h2>Connect GitHub to GitBook</h2>
+    </div>
+    <p>This is the key step. Inside your GitBook Space, go to:</p>
+    <div class="code-box"><span class="b">Space Settings</span> → <span class="b">Integrations</span> → <span class="g">GitHub Sync</span></div>
+    <p>Click <strong>Connect GitHub</strong>. Authorize GitBook to access your repositories. Select your repo:</p>
+    <div class="code-box">Repository: <span class="g">your-username/indaba-health-ts-workshop</span>
+Branch: <span class="g">main</span>
+Sync direction: <span class="a">GitHub → GitBook</span>
+Root path: <span class="g">/</span></div>
+    <p>Click <strong>Sync</strong>. GitBook will immediately import all your markdown files and build the site structure from your SUMMARY.md.</p>
+    <div class="tip-box">💡 After setup: any git push to main will automatically update the live site within ~30 seconds</div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- STEP 5 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">5</div>
+      <h2>Customize the Appearance</h2>
+    </div>
+    <p>In your Space, go to <strong>Customization → Appearance</strong>. Recommended settings for the workshop:</p>
+    <div class="code-box">Theme: <span class="g">Dark</span>
+Primary color: <span class="g">#4ade80</span>  <span class="m">← matches workshop green</span>
+Logo: Upload an Indaba or workshop logo
+Cover image: A banner image (1200×300px works well)
+Favicon: Small square icon</div>
+    <p>Under <strong>Page Options</strong>, enable:</p>
+    <ul class="checklist">
+      <li>Page ratings (let participants give feedback)</li>
+      <li>Table of contents visible by default</li>
+      <li>Previous / Next navigation at the bottom of each page</li>
+    </ul>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- STEP 6 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">6</div>
+      <h2>Embed Your Colab Notebook</h2>
+    </div>
+    <p>In the <strong>Hands-On Coding</strong> page in GitBook's editor, place your cursor and type <code style="font-family:var(--mono);color:var(--green)">/embed</code>. Select the Embed block.</p>
+    <p>Paste your Google Colab URL. GitBook renders a clickable preview button directly in the page. Participants never need to leave the workshop site to open the notebook.</p>
+    <p>You can also add a Colab badge in your markdown:</p>
+    <div class="code-box"><span class="m">[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](YOUR_COLAB_URL)</span></div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- STEP 7 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">7</div>
+      <h2>Publish & Share</h2>
+    </div>
+    <p>Click <strong>Publish</strong> in the top right of your Space. Select <strong>Public</strong>. GitBook will give you a URL:</p>
+    <div class="code-box">https://<span class="g">yourname</span>.gitbook.io/<span class="g">indaba-health-ts-workshop</span></div>
+    <p><strong>Optional — Custom Domain:</strong> If you have a domain, go to <strong>Space Settings → Custom Domain</strong> and add a CNAME record pointing to <code style="font-family:var(--mono);color:var(--green)">hosting.gitbook.io</code>. Then set your custom domain in GitBook.</p>
+    <div class="note-box">📌 Share this URL in your opening slide, Indaba Slack, and WhatsApp groups the day before so participants can pre-load it.</div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- STEP 8 -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">8</div>
+      <h2>Updating Content After the Workshop</h2>
+    </div>
+    <p>Because everything syncs from GitHub, updates are simple:</p>
+    <div class="code-box"><span class="m"># Edit any .md file on GitHub or locally, then:</span>
+git add .
+git commit -m <span class="g">"Add post-workshop Q&A notes"</span>
+git push origin main
+<span class="m"># GitBook updates automatically within ~30 seconds</span></div>
+    <p>Participants who bookmark the URL will always see the latest version. You can add a post-workshop page with recordings, Q&A notes, and follow-up resources.</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- FINAL CHECKLIST -->
+  <div class="step-block">
+    <div class="step-header">
+      <div class="step-badge">✓</div>
+      <h2>Pre-Workshop Checklist</h2>
+    </div>
+    <ul class="checklist">
+      <li>GitHub repo is public and has all workshop files</li>
+      <li>SUMMARY.md lists every page correctly</li>
+      <li>GitBook GitHub Sync is active and last synced successfully</li>
+      <li>Colab notebook opens and runs without errors</li>
+      <li>Colab is embedded or linked from the Hands-On page</li>
+      <li>Workshop site URL is public (not behind login)</li>
+      <li>URL has been shared with participants in advance</li>
+      <li>Dataset is accessible (PhysioNet credential or simulated data)</li>
+      <li>Page ratings are enabled so you can collect feedback</li>
+    </ul>
+  </div>
+
+  <!-- FINAL BANNER -->
+  <div class="final-banner">
+    <h3>You're Live 🎉</h3>
+    <p>Your workshop is now a permanent, shareable resource for the African ML community. Every future Indaba participant who finds it can learn from what you built.</p>
+    <span class="final-url">yourname.gitbook.io/indaba-health-ts-workshop</span>
+  </div>
+
+</main>
+
+</body>
+</html>
